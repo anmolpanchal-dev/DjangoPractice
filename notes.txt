@@ -1,0 +1,22 @@
+python -m venv virtual-Environment-name
+.\virtual-Environment-name\Scripts\activate
+pip freeze - current python environment me installed packages ki list deta hai 
+
+
+agar hume apna project doosre ki pc pr share karnahai toh hum usse package ki list bhejte hai as a req.txt oor another pc me "pip install -r .\req.txt" command chala kr humare project me use hone wale sare packages ko apne pc me install kr skta hai 
+
+
+django-admin to create project in django - django-admin startproject project_name .
+
+To run django project - python manage.py runserver (optional : we can also give random 4-digit port after runserver)
+To create app = python manage.py startapp app_name
+
+migrations - jb bhi dtabse k modelsl create karte hai unka code yah aata hai 
+
+INCLUDE - ek url file ko doosre url file k sath connect karta hai 
+
+
+
+
+
+https://youtube.com/shorts/IfGofc-McTY?si=35H1ZNSawJs85Y50

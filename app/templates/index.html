@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Hero Section -->
+    <div class="row align-items-center py-5">
+
+        <div class="col-md-7">
+            <h1 class="display-4 fw-bold">Welcome to Our Website</h1>
+
+            <p class="lead mt-3">
+                Discover simple, reliable and useful solutions designed
+                to make your experience better.
+            </p>
+
+            <div class="mt-4">
+                <a href="#" class="btn btn-primary me-2">Get Started</a>
+                <a href="#" class="btn btn-outline-secondary">Learn More</a>
+            </div>
+        </div>
+
+        <div class="col-md-5 text-center mt-4 mt-md-0">
+            <div class="p-5 border rounded shadow-sm">
+                <h2>Welcome!</h2>
+                <p class="mb-0">
+                    We are happy to have you here.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Features Section -->
+    <div class="text-center mt-5">
+        <h2>What We Offer</h2>
+        <p class="text-muted">
+            Everything you need in one place.
+        </p>
+    </div>
+
+    <div class="row g-4 mt-3">
+
+        <div class="col-md-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h4>Easy to Use</h4>
+                <p>
+                    Our platform is simple, clean and easy to use for everyone.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h4>Reliable</h4>
+                <p>
+                    We focus on providing dependable and quality solutions.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h4>Great Support</h4>
+                <p>
+                    We are always ready to help and provide a better experience.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <form class="container mx-auto card p-3" action="{% url 'saveData' %}" method="post">
+
+        {% csrf_token %}
+
+        {% include 'component/showMessage.html' %}
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Note Title</label>
+            <input 
+                type="text" 
+                id="title" 
+                name="title"
+                class="form-control" 
+                placeholder="Enter Note Title"
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="desc" class="form-label">Note Description</label>
+            <textarea 
+                rows="5" 
+                id="desc" 
+                name="description"
+                class="form-control" 
+                placeholder="Enter Note Description"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" style="width:100%" class="btn btn-primary">
+                Add Note
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </button>
+        </div>
+
+    </form>
+
+</div>
+<div class="container">
+    <h1>Notes {{notes|length}} </h1>
+    <div class="row">
+        {% if notes%}
+        {% for note in notes %}
+        <div class="p-2 col-sm-2 col-md-3 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 
+                    {% if note.isPublish %}
+                    {% else %}
+                    class="text-decoration-line-through"
+                    {% endif %}
+                    >{{note.title}}</h4>
+                    <p>{{note.description}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'updateViewPage' id=note.id %}" class="btn btn-sm btn-info">
+                        Edit
+                    </a>
+                    <a href="{% url 'deleteView' id=note.id %}" class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="card mx-auto">
+            <h4 class="text-center">
+                No Notes Found
+            </h4>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
